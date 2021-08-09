@@ -26,7 +26,7 @@ const item4 = {
     value: 1,
 
     addValue(val) {
-        return item.value + val
+        return item4.value + val
     }
 }
 
