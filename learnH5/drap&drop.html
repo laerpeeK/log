@@ -1,0 +1,80 @@
+<!--https://powerdong.github.io/myBlog/2019/09/07/HTML5-%E6%8B%96%E6%8B%BD/-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>drap&drop</title>
+	<style>
+		.drop {
+			width: 100px;
+			height: 100px;
+			margin-bottom: 50px;
+			background-color: #8c38f2;
+		}
+
+		.target {
+			width: 200px;
+			height: 200px;
+			background-color: rgb(128, 131, 128)
+		}
+	</style>
+</head>
+<body>
+	<p class='info'>这里显示开始和结束信息</p>
+	<p class='going'>这里显示正在进行的信息</p>
+
+	<div class='drop' draggable="true">我是可以拖动的元素</div>
+	<div class='target'>我是目标元素</div>
+
+	<script>
+		const drop = document.querySelector('.drop')
+		const target = document.querySelector('.target')
+		const info = document.querySelector('.info')
+		const going = document.querySelector('.going')
+
+		drop.addEventListener('dragstart', function(e){
+			//传值
+			e.dataTransfer.setData('name', '这是我给你传的值')
+			info.innerHTML = '被拖拽元素开始拖动'
+		})
+
+		drop.addEventListener('dragend', function(e) {
+			info.innerHTML = '被拖拽元素拖动完成'
+			console.log('被拖拽元素拖动完成')
+		})
+
+		drop.addEventListener('drag', function(e){
+			going.innerHTML = '被拖拽元素正在被拖动'
+		})
+
+		target.addEventListener('dragenter', function(e) {
+			info.innerHTML = '被拖拽元素进入目标元素'
+		})
+
+		target.addEventListener('dragover', function(e){
+			going.innerHTML = '被拖拽元素在目标元素上移动'
+			//需要阻止dragover的默认行为才会触发drop事件
+			e.preventDefault()
+		})
+
+		target.addEventListener('dragleave', function(e){
+			going.innerHTML = '被拖拽元素离开目标元素'
+		})
+
+		target.addEventListener('drop',function (e) {
+    e.preventDefault()   
+		e.stopPropagation() 
+    // 获取到传过来的值
+    let returnInfo = e.dataTransfer.getData('name')
+    console.log(returnInfo)
+    info.innerHTML = '被拖拽元素在目标元素上放下'
+    // 通过控制台显示信息判断拖放完成和在目标元素上放下两个事件的先后顺序
+    console.log('被拖拽元素在目标元素上放下'); 
+  })
+	</script>
+
+</body>
+</html>
