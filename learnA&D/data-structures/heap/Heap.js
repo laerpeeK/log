@@ -105,7 +105,31 @@ export default class Heap {
 	}
 
 	remove(item, comparator = this.compare) {
-			//待续
+		//查找所有要删除的节点的个数	
+		const numberOfItemsToRemove = this.find(item, comparator).length
+		for(let iteration = 0; iteration < numberOfItemsToRemove; iteration += 1) {
+			//找到需要删除的节点的索引，因为每一次删除后的heapify都会让堆结构发生变化
+			//从要删除的元素索引的数组里拿出最后一个索引
+			const indexToRemove = this.find(item, comparator).pop()
+			if(indexToRemove === (this.heapContainer.length -1)) {
+				this.heapContainer.pop()
+			} else {
+				//如果删除的是中间的节点，需要做处理
+				//移动最后一个节点到被删除节点的位置
+				this.heapContainer[indexToRemove] = this.heapContainer.pop()
+				//获取到当前被删除位置的父节点
+				const paraentItem = this.parent(indexToRemove)
+				//如果没有父节点或者父节点的次序正确，就进行向下的heapDown，否则向上heapify
+				if(this.hasLeftChild(indexToRemove)
+				&& (!parentItem||this.pairIsInCorrectOrder(parentItem, this.heapContainer[indexToRemove]))
+				) {
+					this.heapifyDowm(indexToRemove)
+				} else {
+					this.heapifyUp(indexToRemove)
+				}
+			}
+		}
+		return this
 	}
 
 	isEmpty() {
@@ -137,7 +161,8 @@ export default class Heap {
 		while(
 			this.hasParent(currentIndex)
 			&& !this.pairIsInCorrectOrder(this.parent(currentIndex), this.heapContainer[currentIndex])
-		) {
+			//当前节点有父节点，并且当前节点和父节点的次序不正确
+			) {
 			this.swap(currentIndex, this.getParentIndex(currentIndex))
 			currentIndex = this.getParentIndex(currentIndex)
 		}
@@ -151,23 +176,27 @@ export default class Heap {
 	heapifyDown(customStartIndex = 0) {
 		let currentIndex = customStartIndex //需要最先处理的节点的索引
 		let nextIndex = null//下一个节点索引
-
+		//当前节点还有左子节点时就继续循环
 		while(this.hasLeftChild(currentIndex)) {
 			if(
+				//考虑右孩子节点
 				this.hasRightChild(currentIndex)
+				//如果当前节点也有右子节点，并且当前节点的左右两个子节点的次序是正确的
 				&& this.pairIsInCorrectOrder(this.rightchild(currentIndex), this.leftChild(currentIndex))
 			) {
+				//那么下一个节点就是当前节点的右子节点
 				nextIndex = this.getRightChildIndex(currentIndex)
 			} else {
+				//否则是左子节点
 				nextIndex = this.getLeftChildIndex(currentIndex)
 			}
-
+			//考虑父子节点位置
 			if(this.pairIsInCorrectOrder(
 				this.heapContainer[currentIndex],
 				this.heapContainer[nextIndex])) {
+					//如果当前节点和下一个节点次序正确，跳出循环结束操作
 					break
 			}
-
 			this.swap(currentIndex, nextIndex) 
 			currentIndex = nextIndex
 		}
