@@ -4,13 +4,16 @@ import LinkedList from '../linked-list/data-structure/linkedList'
 //数组+散列函数
 //对于哈希表，它经常存放的是一些键值对的数据
 //处理哈希冲突：开放寻址法，拉链法
+//影响冲突数量
 const defaultHashTableSize = 32
 export default class HashTable {
 	constructor(hashTableSize = defaultHashTableSize) {
+		//用空列表补充buckets
 		this.buckets = Array(hashTableSize).fill(null).map(() => new LinkedList())
 		this.keys = {}
 	}
 
+	//将key值转换为哈希数
 	hash(key) {
 		const hash = Array.from(key).reduce(
 			(hashAccumulator, keySymbol) => (hashAccumulator + keySymbol.charCodeAt(0))
