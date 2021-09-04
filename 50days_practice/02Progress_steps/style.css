@@ -34,7 +34,7 @@ body,html {
 }
 
 .progress-container::before {
-	content: "";
+	content:"";
 	width: 100%;
 	background-color: var(--color--);
 }

@@ -8,8 +8,9 @@ import LinkedList from '../linked-list/data-structure/linkedList'
 const defaultHashTableSize = 32
 export default class HashTable {
 	constructor(hashTableSize = defaultHashTableSize) {
-		//用空列表补充buckets
+		//用空列表补充buckets,每一个node对应一个{key, value}
 		this.buckets = Array(hashTableSize).fill(null).map(() => new LinkedList())
+		//key: keyHash
 		this.keys = {}
 	}
 
@@ -18,17 +19,21 @@ export default class HashTable {
 		const hash = Array.from(key).reduce(
 			(hashAccumulator, keySymbol) => (hashAccumulator + keySymbol.charCodeAt(0))
 		)
+
+		//key的字符转Unicode编码除以31
 		return hash % this.buckets.length
 	}
 
+	//设置key跟value
 	set(key, value) {
 		const keyHash = this.hash(key)
-		this.keys[key] = keyHash
-		const bucketLinkedList = this.buckets[keyHash]
+		this.keys[key] = keyHash  //key equalTo  keyHash
+		const bucketLinkedList = this.buckets[keyHash] //LinkedList
 		const node = bucketLinkedList.find({callback: (nodeValue) => nodeValue.key === key})
-	
+		
+		
 		if(!node) {
-			bucketLinkedList.append({key, value})
+			bucketLinkedList.append({key, value}) //linkedListNode key:value
 		} else {
 			node.value.value = value
 		}
