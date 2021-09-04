@@ -1,0 +1,48 @@
+* {
+	margin: 0;
+	padding: 0;
+	/* width=content+padding+border */
+	box-sizing: border-box;
+}
+
+body, html {
+	overflow: hidden;
+	display: flex;
+	/* 沿主轴的排列方式 */
+	justify-content: center;
+	/* 沿交叉轴的排列方式 */
+	align-items: center;
+}
+
+.container {
+	display: flex;
+	width: 90vw;
+}
+
+/* 选择container类的所有panel子类 */
+.container > .panel {
+	background-repeat: no-repeat;
+	/* -把背景图片放大到适合元素容器的尺寸,图片比例不变,但是要注意,超出容器的部分可能会裁掉。 */
+	background-size: cover;
+	background-position: center;
+	padding: 10px;
+	color: #fff;
+	flex: 0.5;
+	border-radius: 50px;
+	margin: 10px;
+	transition: flex .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	position: relative;
+	cursor: pointer;
+	height: 90vh;
+}
+
+.container .panel > h3 {
+	color: #f23441;
+	font-size: 25px;
+	text-align: center;
+	line-height: 90vh;
+}
+
+.container > .panel.active {
+	flex: 5;
+}
