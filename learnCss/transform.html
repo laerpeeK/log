@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Transform</title>
+	<style>
+		img {
+			margin-left: 50px;
+			width: 150px;
+			height: 150px;
+			border-radius: 50%;
+			border: 1px solid black;
+			margin-bottom: 80px;
+		}
+
+		@keyframes rotate {
+			0%   {transform: rotate(0deg);}
+			100% {transform: rotate(360deg);} 
+		}
+
+		@keyframes rotateX {
+			0%   {transform: rotateX(0deg);}
+			100% {transform: rotateX(360deg);}
+		}
+
+		@keyframes rotateY {
+			0%   {transform: rotateY(0deg);}
+			100% {transform: rotateY(360deg);}
+		}
+
+		.rotate {
+			animation: rotate 2s infinite linear;
+		}
+
+		.rotateX {
+			animation: rotateX 2s infinite linear;
+
+		}
+
+		.rotateY {
+			animation: rotateY 2s infinite linear;
+		}
+
+		@keyframes translate {
+			0%   {transform: translate(0px, 0px);}
+		  100% {transform: translate(100px, 100px);}
+		}
+
+		@keyframes translateX {
+			0%   {transform: translateX(0px);}
+			100% {transform: translateX(100px);}
+		}
+
+		@keyframes translateY {
+			0%   {transform: translateY(0px);}
+			100% {transform: translateY(100px);}
+		}
+
+		.translate {
+			animation: translate 2s infinite linear;
+		}
+
+		.translateX {
+			animation: translateX 2s infinite linear;
+		}
+
+		.translateY {
+			animation: translateY 2s infinite linear;
+		}
+
+
+		@keyframes scale {
+			0%   {transform: scale(0.1,0.1);}
+			100% {transform: scale(1,1);}
+		}
+
+		@keyframes scaleX {
+			0%   {transform: scaleX(0.1);}
+			100% {transform: scaleX(1);}
+		}
+
+		@keyframes scaleY {
+			0%   {transform: scaleY(0.1);}
+			100% {transform: scaleY(1);}
+		}
+
+		.scale {
+			animation: scale 2s infinite linear;
+		}
+
+		.scaleX {
+			animation: scaleX 2s infinite linear;
+		}
+
+		.scaleY {
+			animation: scaleY 2s infinite linear;
+		}
+
+		@keyframes skew {
+			0%   {transform: skew(0deg, 0deg);}
+			100% {transform: skew(25deg,25deg);}
+		}
+
+		@keyframes skewX {
+			0%   {transform:skewX(0deg);}	
+    	100% {transform:skewX(deg);}	
+		}
+
+		@keyframes skewY {
+    0%   {transform:skewY(0deg);}	
+    100% {transform:skewY(deg);}
+		}
+
+		.skew{
+    	animation:skew 2s infinite linear;
+		}
+
+		.skewX{
+    	animation:skewX 2s infinite linear;
+		}
+		.skewY{
+    	animation:skewY 2s infinite linear;
+		}
+
+作者：不是酸柠檬
+链接：https://juejin.cn/post/6844903983639707661
+来源：掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。	
+
+	</style>
+</head>
+<body>
+	<img src="./images/rotation.png" alt="" class="rotate">
+	<img src="./images/rotation.png" alt="" class="rotateX">
+	<img src="./images/rotation.png" alt="" class="rotateY">
+
+	<br/>
+	<img src="./images/rotation.png" alt="" class="translate">
+	<img src="./images/rotation.png" alt="" class="translateX">
+	<img src="./images/rotation.png" alt="" class="translateY">
+
+	<br/>
+	<img src="./images/rotation.png" alt="" class="scale">
+	<img src="./images/rotation.png" alt="" class="scaleX">
+	<img src="./images/rotation.png" alt="" class="scaleY">
+
+	<br/>
+	<img src="./images/rotation.png" alt="" class="skew">
+	<img src="./images/rotation.png" alt="" class="skewX">
+	<img src="./images/rotation.png" alt="" class="skewY">
+</body>
+</html>
