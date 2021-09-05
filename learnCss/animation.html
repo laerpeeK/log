@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Animation</title>
+	<style>
+		* {
+			margin: 60px;
+		}
+		.keyframesA {
+			width: 50px;
+			height: 50px;
+			background: #f40;
+			border-radius: 50%;
+			animation-name: mymoveA;
+			animation-duration: 2s;
+			animation-delay: 2s;
+			animation-iteration-count: infinite;
+		}
+
+		@keyframes mymoveA {
+			0%   {width: 50px; height: 50px;}
+			50%  {width: 100px; height: 100px;}
+			100% {width: 50px; height: 50px;}
+		}
+
+		.keyframesB {
+			width: 100px;
+			height: 50px;
+			background: #f40;
+			position: relative;
+			animation-name: mymoveB;
+			animation-duration: 3s;
+			animation-timing-function: ease-in-out;
+			animation-direction:initial;
+			animation-iteration-count: 5;
+		}
+
+		@keyframes mymoveB {
+			0% {left:0px;}
+			100% {left:300px;}
+		}
+	</style>
+</head>
+<body>
+	<div class="keyframesA"></div>
+	<div class="keyframesB"></div>
+	<button id="begin">Begin</button>
+	<button id="pause">Parse</button>
+</body>
+<script>
+	const keyframesA = document.querySelector('.keyframesA')
+	const beginBtn = document.querySelector('#begin')
+	const pauseBtn = document.querySelector('#pause')
+	beginBtn.addEventListener('click', () => {
+		keyframesA.style.animationPlayState = "running"
+	})
+	pauseBtn.addEventListener('click', ()=> {
+		keyframesA.style.animationPlayState = 'paused'
+	})
+</script>
+</html>
