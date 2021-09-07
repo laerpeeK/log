@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>电影效果</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		.pic{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background: url('https://www.eveningwater.com/my-web-projects/jQuery/15/img/testImg-00.jpg') no-repeat;
+    background-size: cover;
+    animation: fade-away 2.5s linear;  
+}
+.text{
+    position: relative;
+    line-height: 55px;
+    color: #fff;
+    font-size: 36px;
+    text-align: center;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    opacity: 0;
+    animation: shows 2s cubic-bezier(.74,-0.1,.86,.83);
+}
+    
+@keyframes fade-away {    
+    30%{
+        filter: brightness(1);
+    }
+    100%{
+        filter: brightness(0);
+    }
+}
+@keyframes shows {        
+    20%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="pic">
+			<div class="text">
+				<p>如果生活中有什么使你感到快乐，那就去做吧</p>
+				<br>
+				<p>不要管别人说什么</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
