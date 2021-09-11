@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sound Board</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			height: 100vh;
+			font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,  sans-serif;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			overflow: hidden;
+			background: linear-gradient(to right, #2396ef, #447eff);
+		}
+
+		#buttons {
+			position: relative;
+			text-align: center;
+		}
+
+		#buttons > button {
+			display: inline-block;
+			padding: 14px 18px;
+			font-size: 18px;
+			border-radius: 10px;
+			background: linear-gradient(90deg, #0970c5, #064d86);
+			color: #fff;
+			outline: none;
+			border: none;
+			cursor: pointer;
+			min-width: 8rem;
+			margin: 15px;
+		}
+
+		#buttons > button:hover {
+			opacity: .9;
+		}
+	</style>
+</head>
+<body>
+	<div id="buttons"></div>
+	<script>
+		const $ = selector => document.querySelector(selector)
+		const buttonContainer = $('#buttons')
+		const sounds = ['applause', 'boo', 'gasp', 'tada', 'victory', 'wrong']
+		const create = element => document.createElement(element)
+		const body = document.body
+		sounds.forEach(sound => {
+			const btn = create('button')
+			btn.textContent = sound
+			btn.type = "button"
+			const audio = create('audio')
+			audio.src="./audio/" + sound + '.mp3'
+			audio.id = sound
+			btn.addEventListener('click', () => {
+				stopSounds()
+				$('#' + sound).play()
+			})
+			buttonContainer.appendChild(btn)
+			buttonContainer.insertAdjacentElement('beforebegin',audio) 
+		})
+
+		function stopSounds() {
+			sounds.forEach(sound => {
+				$('#' + sound).pause()
+				$('#' + sound).currentTime = 0
+			})
+		}
+	</script>
+</body>
+</html>
