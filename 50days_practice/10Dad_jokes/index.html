@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Dad Jokes</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			background: linear-gradient(45deg, #f5e488, #dae63d);
+			display: flex;
+			height: 100vh;
+			justify-content: center;
+			align-items: center;
+			font-family: Cambraia, Cochin, Georgia, Times, 'Times New Roman', serif;
+		}
+
+		.container {
+			background-color: #fff;
+			width: 100%;
+			max-width: 800px;
+			min-height: 300px;
+			border-radius: 15px;
+			box-shadow: 0 4px 5px #ccda15;
+			padding: 50px 20px;
+			text-align: center;
+		}
+
+		.container > h1 {
+			color: #95c5f1;
+			letter-spacing: 2px;
+		}
+
+		.container > p {
+			color: #535455;
+			font-size: 35px;
+			line-height: 40px;
+			margin: 40px auto;
+			max-width: 600px;
+		}
+
+		.container > .btn {
+			display: inline-block;
+			padding: 14px 26px;
+			outline: none;
+			border: none;
+			background-color: #bfec83;
+			box-shadow: 0 6px 8px #75b423;
+			color: #fff;
+			font-size: 15px;
+			cursor: pointer;
+			border-radius: 5px;
+		}
+
+		.container > .btn:last-child {
+			margin-left: 15px;
+		}
+
+		.container > .btn:hover {
+			transform: scale(0.98);
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Don't Laugh Challange</h1>
+		<p id="joke-content">Joke goes here</p>
+		<button type="button" id="getJoke" class="btn">Get Another Joke</button>
+		<button type="button" id="translate" class="btn">need to translate?</button>
+	</div>
+	<script>
+		const $ = v => document.querySelector(v)
+		const content = $('#joke-content')
+		const getJokeBtn = $('#getJoke')
+		const translateBtn = $('#translate')
+		const headerConfig = {
+			headers: {
+				Accept: 'application/json'
+			}
+		}
+		const api = 'https://icanhazdadjoke.com'
+		const on = (el, type, handler, useCapture = false) => {
+			if(el && type && handler) {
+				el.addEventListener(type, handler, useCapture)
+			}
+		}
+
+		on(translateBtn, 'click', () => {
+			window.open('https://www.eveningwater.com/my-web-projects/js/34/')
+		})
+		on(getJokeBtn, 'click', request)
+		request()
+		async function request() {
+			const res = await fetch(api, headerConfig)
+			const data = await res.json()
+			content.innerHTML = data.joke
+		}
+	</script>
+</body>
+</html>
