@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CSS ARROW PLEASE</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		.container {
+			margin: 0 auto;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-top: 50px;
+		}
+
+		.arrow_box {
+			width: 100px;
+			height: 50px;
+			padding: 20px;
+			position: relative;
+			background: #fff;
+			border: 2px solid #d53c3c;
+		}
+
+		.arrow_box::after, .arrow_box::before {
+			left: 100%;
+			top: 50%;
+			border: 1px solid transparent;
+			content: "";
+			height: 0px;
+			width: 0px;
+			position: absolute;
+			pointer-events: none;
+		}
+
+
+	  .arrow_box::after {
+			border-left-color: #ffffff;
+			border-width: 15px;	
+			transform: translateY(-50%);	
+		}
+
+		
+		.arrow_box::before {
+			border-left-color: #d53c3c;
+			border-width: 18px;
+			transform: translateY(-50%);
+		}
+
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="arrow_box">
+			CSS ARROW PLEASE!
+		</div>
+	</div>
+</body>
+</html>
