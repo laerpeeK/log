@@ -1,6 +1,7 @@
 import Comparator from '../../utils/Comparator'
 import HashTable from '../hash-table/HashTable'
 
+//二叉树节点类
 export default class BinaryTreeNode {
 	constructor(value = null) {
 		this.left = null
@@ -12,7 +13,7 @@ export default class BinaryTreeNode {
 		this.meta = new HashTable()
 
 		//此比较器用于比较二叉树节点之间的差异
-		this.nodeComparator = new Comaprator()		
+		this.nodeComparator = new Comparator()		
 	}
 
 	get leftHeight() {
