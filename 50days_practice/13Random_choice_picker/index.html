@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Random Choice Picker</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			align-items: center;
+			height: 100vh;
+			background: linear-gradient(to left, #2396ef, #2275d4);
+			font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+			padding: 20px;
+		}
+
+		h1 {
+			color: #fff;
+			margin-bottom: 15px;
+			max-width: 600px;
+		}
+
+		.choicesTextarea {
+			outline: none;
+			background-color: #fff;
+			border-radius: 5px;
+			border: 1px solid #dedcde;
+			max-width: 600px;
+			width: 100%;
+			padding: 15px;
+			display: block;
+			height: 8rem;
+			resize: none;
+			font-size: 16px;
+		}
+
+		.choicesTextarea:focus {
+			border-color: #08426e;
+		}
+
+		::-webkit-input-placeholder {
+			color: #535455;
+			font-size: 16px;
+		}
+
+		.tags {
+			margin-top: 15px;
+			max-width: 600px;
+		}
+
+		.tags > .tag {
+			padding: 8px 18px;
+			background-color: #194cd8;
+			border-radius: 8px;
+			color: #fff;
+			display: inline-block;
+			margin: 5px;
+		}
+
+		.tags > .tag.highlight {
+			background-color: #e27f0e;
+		}
+
+	</style>
+</head>
+<body>
+	<h1>Enter anll of the choices divided by a comma (','), if there is no comma(','), they will be separated by space, Press enter when you 're done.</h1>
+	<textarea id="choicesTextarea" placeholder="enter some choices here" class="choicesTextarea"></textarea>
+	<div id="tags" class="tags"></div>
+</body>
+<script>
+	const $ = v => document.querySelector(v);
+	const choicesTextarea = $("#choicesTextarea");
+	const tags = $("#tags");
+
+	choicesTextarea.addEventListener('keyup',	e => {
+    const value = e.target.value;
+    const isComma = value.indexOf(',') > -1;
+    const splitSymbol = isComma ? ',' : '';
+    createTags(value,splitSymbol);
+    	if(e.keyCode === 13){
+        setTimeout(() => {
+          e.target.value = '';
+        },100)
+        randomTag();
+    	}
+	});
+
+	function createTags(value,splitSymbol){
+    if(!value || !value.length)	return;
+    const words = value.split(splitSymbol).map(v => v.trim()).filter(v => v);
+    tags.innerHTML = '';
+    words.forEach(word => {
+      const tag = document.createElement('span');
+      tag.classList.add('tag');
+      tag.innerText = word;
+      tags.appendChild(tag);
+    })
+	}
+
+	function randomTag(){
+    const time = 50;
+    let timer = null;
+    let randomHighLight = () => {
+      const randomTagElement = pickerRandomTag();
+      highLightTag(randomTagElement);
+      timer = setTimeout(randomHighLight,100);
+      setTimeout(() => {
+        unHighLightTag(randomTagElement);
+      },100);
+    }
+    randomHighLight();
+    setTimeout(() => {
+      clearTimeout(timer);
+      setTimeout(() => {
+          const randomTagElement = pickerRandomTag();
+          highLightTag(randomTagElement);
+      },100);
+    },time * 100);
+	}
+
+	function pickerRandomTag(){
+    const tagElements = document.querySelectorAll('#tags .tag');
+    return tagElements[Math.floor(Math.random() * tagElements.length)];
+	}
+
+	function highLightTag(el){
+    el && el.classList.add('highlight');
+	}
+
+	function unHighLightTag(el){
+    el && el.classList.remove('highlight');
+	}
+</script>
+</html>
