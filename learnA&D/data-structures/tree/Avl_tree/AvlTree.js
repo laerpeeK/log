@@ -40,6 +40,8 @@ export default class AvlTree extends BinarySearchTree {
 		}
 	}
 
+
+	//向左子树L的左孩子L中插入新节点导致不平衡，需要右旋操作
 	rotateLeftLeft(rootNode) {
 	
 		const leftNode = rootNode.left
@@ -58,6 +60,7 @@ export default class AvlTree extends BinarySearchTree {
 		leftNode.setRight(rootNode)
 	}
 
+	//往左子树的右孩子节点插入新节点导致不平衡，
 	rotateLeftRight(rootNode) {
 		const leftNode = rootNode.left
 		rootNode.setLeft(null)
@@ -77,6 +80,7 @@ export default class AvlTree extends BinarySearchTree {
 		this.rotateLeftLeft(rootNode)
 	}
 
+	//往右子树的左孩子节点插入新节点导致不平衡，
 	rotateRightLeft(rootNode) {
 		const rightNode = rootNode.right
 		rootNode.setRight(null)
@@ -96,6 +100,7 @@ export default class AvlTree extends BinarySearchTree {
 		this.rotateRightRight(rootNode)
 	}
 
+	//往右字树的右孩子节点插入新节点，导致不平衡，需要左旋操作
 	rotateRightRight(rootNode) {
 		const rightNode = rootNode.right
 		rootNode.setRight(null)
