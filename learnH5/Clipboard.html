@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Clip board</title>
+</head>
+<body>
+	<img id="clipboard" >
+	<button id="btn">粘贴</button>
+</body>
+<script>
+	const clipboard = document.querySelector('#clipboard')
+	const btn = document.querySelector('#btn')
+	async function getClipboardContents () {
+		try {
+			const clipboardItems = await navigator.clipboard.read()
+			console.log('clipboardItems', clipboardItems)
+			for(const clipboardItem of clipboardItems) {
+				for(const type of clipboardItem.types) {
+					const blob = await clipboardItem.getType(type)
+					if(type === 'text/plain') {
+						const text = await blob.text()
+						return text
+					} else if (type === 'image/png') {
+						const url = URL.createObjectURL(blob)
+						clipboard.src = url
+					}
+				}
+			}
+		} catch(e) {
+			return 'error'
+		}
+	}
+
+	btn.addEventListener('click', (e) => {
+		getClipboardContents()
+	})
+</script>
+</html>
