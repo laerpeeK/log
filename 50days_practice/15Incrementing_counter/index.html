@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Incrementing Counter</title>
+	<link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+	<style>
+		* {
+    	margin: 0;
+    	padding: 0;
+    	box-sizing:border-box;
+		}
+
+		body {
+    	height: 100vh;
+    	background: linear-gradient(to right,#a809ad,#ec9cff);
+    	overflow: hidden;
+		}
+
+		body,.counter-container {
+    	display: flex;
+    	justify-content: center;
+    	align-items: center;
+		}
+
+		.counter-container {
+    	color: #fff;
+    	margin: 40px 50px;
+    	flex-direction: column;
+		}
+
+		.counter-container > .counter {
+    	font-size: 60px;
+    	margin: 10px 0;
+		}
+
+		.counter-container > span {
+    	font-size: 20px;
+		}
+	</style>
+</head>
+<body>
+</body>
+<script>
+	const body = document.body
+	const counters = [
+		{
+			class: 'fa-youtube',
+			value: 5000,
+			text: 'YouTube Subscribers'
+		},
+		{
+			class: 'fa-facebook',
+			value: 7500,
+			text: 'Facebook Fans'
+		},
+		{
+			class: 'fa-twitter',
+			value: 12000,
+			text: 'Twitter Followers'
+		}
+	]
+
+	function updateCounterHandler() {
+		const counters_elements = document.querySelectorAll('.counter')
+		counters_elements.forEach(element => {
+			element.textContent = '0'
+			const updateCounter = () => {
+				const value  = +element.getAttribute('data-count')
+				const textContent = +element.textContent
+				const increment = value / 100
+				if(textContent < value) {
+					element.textContent = `${Math.ceil(increment + textContent)}`
+					setTimeout(updateCounter, 10)
+				} else {
+					element.textContent = value
+				}
+			}
+			updateCounter()
+		})
+	}
+
+	function createTemplate() {
+		counters.forEach(counter => {
+			const counter_element = document.createElement('div')
+			counter_element.classList.add('counter-container')
+			counter_element.innerHTML = `
+				<i class="fab fa-3x ${counter.class}"></i>
+				<div class="counter" data-count="${counter.value}"></div>
+				<span>${counter.text}</span>
+			`
+			body.insertBefore(counter_element, body.firstElementChild)
+		})
+		updateCounterHandler()
+	}
+
+	window.onload = () => createTemplate()
+</script>
+</html>
