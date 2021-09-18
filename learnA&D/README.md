@@ -42,3 +42,12 @@
 在AVL树中，任一节点对应的两棵子树的最大高度差为1，因此它也被称为高度平衡树。查找、插入和删除在平均和最坏情况下的时间复杂度都是 O ( log ⁡ n )，增加和删除元素的操作则可能需要借由一次或多次树旋转，以实现树的重新平衡。
 balanceFactor: this.leftHeight - this.rightHeight
 [详细图文——AVL树](https://blog.csdn.net/qq_25343557/article/details/89110319)
+
+
+算法：
+计数排序：
+首先创建一个buckets数组用于存放比currentValue出现小的频率，
+这样可以得到一个由0开始递增的buckets数组
+PS：在此过程中，假如有为0的会先是空白，然后填充上一次的频率。
+此时buckets数组存放的即为排序完的下标。对应索引为value- minValue
+
