@@ -27,7 +27,7 @@ export default class AvlTree extends BinarySearchTree {
 		//如果当前节点的平衡因子>1， 说明不平衡了
 		if(node.balanceFactor > 1) {
 			if (node.left.balanceFactor > 0) {
-				this.rotateLeftLeft(node)
+				this.rotateLeftLeft(node) //右旋
 			} else if (node.left.balanceFactor < 0) {
 				this.rotateLeftRight(node)
 			}
