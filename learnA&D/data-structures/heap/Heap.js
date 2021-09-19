@@ -67,7 +67,7 @@ export default class Heap {
 		return this.heapContainer[0]
 	}
 
-	//
+	//获取堆顶元素并重新排序堆
 	poll() {
 		if(this.heapContainer.length === 0) {
 			return null
@@ -182,7 +182,7 @@ export default class Heap {
 				//考虑右孩子节点
 				this.hasRightChild(currentIndex)
 				//如果当前节点也有右子节点，并且当前节点的左右两个子节点的次序是正确的
-				&& this.pairIsInCorrectOrder(this.rightchild(currentIndex), this.leftChild(currentIndex))
+				&& this.pairIsInCorrectOrder(this.rightchild(currentIndex), this.leftChild(currentIndex)) //右小于左
 			) {
 				//那么下一个节点就是当前节点的右子节点
 				nextIndex = this.getRightChildIndex(currentIndex)
@@ -194,7 +194,7 @@ export default class Heap {
 			if(this.pairIsInCorrectOrder(
 				this.heapContainer[currentIndex],
 				this.heapContainer[nextIndex])) {
-					//如果当前节点和下一个节点次序正确，跳出循环结束操作
+					//如果当前节点和下一个节点次序正确，跳出循环结束操作  父<子
 					break
 			}
 			this.swap(currentIndex, nextIndex) 
