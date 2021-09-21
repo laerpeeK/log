@@ -22,4 +22,42 @@
 
    适合不清楚JavaScript变量和类型的，栈/堆内存的介绍，确实填补了关于变量以及存储方式的知识点空白，类型相关的可以有需要的时候参考。
 
+
+
+
+#### 九月文章：
+
+1. [50天用JavaScript完成50个web项目，我学到了什么?](https://juejin.cn/post/6994349533807247397#heading-32)
+
+   适合所有前端开发者，可以在github上搜Brad Traversy或者是eventWater，有相关源码。一天写一个可以有效提高自己的CSS水平。
+
    
+
+2. [前端深入之css篇丨2020年，彻底掌握css动画【transition】](https://juejin.cn/post/6844903967491784712)
+
+   [前端深入之css篇丨2020年，彻底掌握css动画【animation】](https://juejin.cn/post/6844903974408028167#heading-0)
+
+   [前端深入之css篇丨2020年，彻底掌握css动画【transform】](https://juejin.cn/post/6844903983639707661)
+
+   同上，建议先搞懂CSS动画再做上面的50projects50days，PS:为什么使用CSS动画？可以深究一下噢，原理可以从八月文章-浏览器工作原理与实践中找到答案。
+
+   
+
+3. [尝试用通俗的方式解释协程](https://zhuanlan.zhihu.com/p/148152129)
+
+   [JavaScript中的协程](https://zhuanlan.zhihu.com/p/148462034)
+
+   知乎上的文章，之所以我去搜协程是因为接触到async await 然后底层的generator和promise，从而诱发了了解协程的想法, 在后面的工作开发中也帮我更好地使用async await进行异步编程。
+
+   
+
+4. [一文吃透时间复杂度和空间复杂度](https://juejin.cn/post/6854573206830448654)
+
+   意识到数据结构和算法的重要性，于是乎，从最基础的时间复杂度和空间复杂度开始。
+
+
+
+​	5.[JavaScript权威指南（原书第7版）](https://book.douban.com/subject/35396470/)
+
+​		争取国庆假期完能够学完这本书吧！
+
