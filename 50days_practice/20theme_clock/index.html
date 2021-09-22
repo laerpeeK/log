@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>theme clock</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		:root {
+			--light-mode-color: #ffffff;
+			--dark-mode-color: #000000;
+		}
+
+		body, html {
+			height: 100%;
+			font-family: '微软雅黑';
+		}
+
+		body > .btn-group > .btn, body {
+			background-color: var(--light-mode-color);
+			color: var(--dark-mode-color);
+		}
+
+		body {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			overflow: hidden;
+			flex-direction: column;
+			transition: all .3s ease-in-out;
+		}
+
+		body.dark, body.dark > .btn-group > .btn {
+			background-color: var(--dark-mode-color);
+			color: var(--light-mode-color);
+		}
+
+
+		body > .btn-group {
+			display: flex;
+			justify-content: space-around;
+			width: 100%;
+			max-width: 350px;
+		}
+
+		body > .btn-group > .btn {
+			display: inline-block;
+			outline: none;
+			padding: 14px 18px;
+			border: none;
+			box-shadow: 0 3px 4px var(--dark-mode-color);
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		body > .btn-group > .btn:hover {
+			opacity: .8;
+		}
+
+		body.dark > .btn-group > .btn {
+			box-shadow: 0 3px 4px var(--light-mode-color);
+		}
+
+		body > .clock-container {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		body > .clock-container > .clock {
+			position: relative;
+			width: 200px;
+			height: 200px;
+			border: 1px solid var(--dark-mode-color);
+			background-color: var(--light-mode-color);
+			border-radius: 50%;
+			margin: 15px 0;
+		}
+
+		body.dark > .clock-container > .clock {
+			border: 1px solid var(--light-mode-color);
+			background-color: var(--dark-mode-color);
+		}
+
+		body > .clock-container > .clock > .needle {
+			background-color: #dce92d;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			width: 4px;
+			height: 55px;
+			transform-origin: bottom center;
+			transition: all .4s linear;
+		}
+
+		body > .clock-container > .clock > .needle.minute {
+			height: 75px;
+			background-color: #34a2ec;
+		}
+
+
+		body > .clock-container > .clock > .needle.second {
+			height: 85px;
+			background-color: #e49709;
+		}
+
+		body > .clock-container > .clock > .center-point {
+			width: 10px;
+			height: 10px;
+			background-color: #f13017;
+		}
+
+		body > .clock-container > .clock > .center-point::after {
+			content: "";
+			width: 5px;
+			height: 5px;
+			background-color: var(--dark-mode-color);
+		}
+
+		body.dark > .clock-container > .clock > .center-point::after {
+    	background-color: var(--light-mode-color);
+		}
+
+		body > .clock-container > .clock > .center-point,body > .clock-container > .clock > .center-point::after {
+    	position: absolute;
+    	left: 50%;
+    	top: 50%;
+    	transform: translate(-50%,-50%);
+    	border-radius: 50%;
+		}
+
+
+		body > .clock-container > .time {
+			font-size: 35px;
+			margin: 15px 0;
+		}
+
+		body > .clock-container >.date {
+			color: #878889;
+			font-size: 15px;
+		}
+
+		body > .clock-container > .date > .circle {
+    	background-color: var(--dark-mode-color);
+    	color: var(--light-mode-color);
+    	width: 20px;
+    	height: 20px;
+    	line-height: 20px;
+    	text-align: center;
+    	border-radius: 50%;
+    	display: inline-block;
+    	vertical-align: text-top;
+   	 	margin:0 5px;
+		}
+
+		body.dark > .clock-container > .date > .circle {
+    	background-color: var(--light-mode-color);
+    	color: var(--dark-mode-color);
+		}
+	</style>
+</head>
+<body>
+	<div class="btn-group">
+		<button type="button" class="btn" id="mode-btn">黑暗模式</button>
+		<button type="button" class="btn" id="lang-btn">English</button>
+	</div>
+	<div class="clock-container">
+		<div class="clock">
+			<div class="needle hour"></div>
+			<div class="needle minute"></div>
+			<div class="needle second"></div>
+			<div class="center-point"></div>
+		</div>
+		<div class="time" id="time"></div>
+		<div class="date" id="date"><span class="circle"></span></div>
+	</div>
+</body>
+<script>
+	const scale = (n,inMin,inMax,outerMin,outerMax) => (n - inMin) * (outerMax - outerMin) / (inMax - inMin) + outerMin;
+const $ = v => document.querySelector(v);
+const langText = {
+    'zh':{
+        "mode-dark-text":"黑暗模式",
+        "mode-light-text":"明亮模式",
+        "lang-text":"中文",
+        "time-before-text":"上午",
+        "time-after-text":"下午",
+        "date-day-text":"日"
+    },
+    'en':{
+        "mode-dark-text":"dark mode",
+        "mode-light-text":"light mode",
+        "lang-text":"English",
+        "time-before-text":"AM",
+        "time-after-text":"PM",
+        "date-day-text":""
+    }
+};
+const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const dayZHs = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"];
+const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const monthZHs = ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"];
+const modeBtn = $("#mode-btn");
+const langBtn = $("#lang-btn");
+const timeEl = $("#time");
+const dateEl = $("#date");
+const hourEl = $('.hour');
+const minuteEl = $('.minute');
+const secondEl = $('.second');
+const body = document.body;
+let currentLang = "zh";
+let timer = null;
+modeBtn.addEventListener('click',(e) => {
+    const isDark = body.classList.contains('dark');
+    if(isDark){
+        body.classList.remove('dark');
+        e.target.textContent = langText[currentLang]['mode-dark-text'];
+    }else{
+        body.classList.add('dark');
+        e.target.textContent = langText[currentLang]['mode-light-text']
+    }
+});
+langBtn.addEventListener('click',(e) => {
+    const isDark = body.classList.contains('dark');
+    currentLang = currentLang === 'zh' ? 'en' : 'zh';
+    if(timer){
+        clearTimeout(timer);
+    }
+    setCurrentDate();
+    modeBtn.textContent = langText[currentLang]['mode-' + ( isDark ? 'light' : 'dark') +'-text'];
+    e.target.textContent = langText[currentLang === 'zh' ? 'en' : 'zh']['lang-text'];
+});
+function setTransForm(el,value){
+    el.style.transform = value;
+}
+function setCurrentDate(){
+    const date = new Date();
+    const month = date.getMonth();
+    const day = date.getDay();
+    const time = date.getDate();
+    const hour = date.getHours();
+    const hourForClock = hour % 12;
+    const minute = date.getMinutes();
+    const second = date.getSeconds();
+    const amPm = hour >= 12 ? langText[currentLang]['time-after-text'] : langText[currentLang]['time-before-text'];
+    const w = currentLang === 'zh' ? dayZHs : days;
+    const m = currentLang === 'zh' ? monthZHs : months;
+    const values = [
+        `translate(-50%,-100%) rotate(${ scale(hourForClock,0,11,0,360) }deg)`,
+        `translate(-50%,-100%) rotate(${ scale(minute,0,59,0,360) }deg)`,
+        `translate(-50%,-100%) rotate(${ scale(second,0,59,0,360) }deg)`
+    ];
+    [hourEl,minuteEl,secondEl].forEach((item,index) => setTransForm(item,values[index]));
+    timeEl.innerHTML = `${ hour }:${ minute >= 10 ? minute : '0' + minute }&nbsp;${ amPm }`;
+    dateEl.innerHTML = `${w[day]},${ m[month]}<span class="circle">${ time }</span>${ langText[currentLang]['date-day-text'] }`;
+    timer = setTimeout(setCurrentDate,1000);
+}
+setCurrentDate();
+</script>
+</html>
