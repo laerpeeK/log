@@ -7,7 +7,8 @@
 
 
     1.当前进入的元素下标 - 窗口头部元素的下标 >= k 头部元素移出队列
-    2.如果当前数字大于队列尾，则删除队列尾，直到当前数字小于等于队列尾，或者队列空 （保证窗口中左侧的值均大于当前入队列的值，这样做可以保证当下次循环窗口头部的元素出队后，窗口头部元素仍然为最大值）
+    2.如果当前数字大于队列尾，则删除队列尾，直到当前数字小于等于队列尾，或者队列空 
+		//（保证窗口中左侧的值均大于当前入队列的值，这样做可以保证当下次循环窗口头部的元素出队后，窗口头部元素仍然为最大值）
     3.队列元素入队
     4.第k次遍历后开始向结果中添加最大值
 
@@ -20,13 +21,14 @@
 */
 
 var maxSlidingWindow = function (nums, k) {
-	const window = []
+	const window = [] //存下标
 	const result = []
 	for( let i = 0; i < nums.length; i++) {
+		//保持窗口长度为k
 		if( i - window[0] > k - 1) {
 			window.shift()
 		}
-		let j = window.length - 1
+		let j = window.length - 1 //队列尾
 		while (j >= 0 && nums[window[j]] <= nums[j]) {
 			j--
 			window.pop()

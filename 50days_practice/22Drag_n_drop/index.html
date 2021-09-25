@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>drag n drop</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			display: flex;
+			overflow: hidden;
+			height: 100vh;
+			align-items: center;
+			justify-content: center;
+			background-image: linear-gradient(to right, red, orange, yellow, green,cyan, blue, purple, red );
+		}
+
+		.drag-list {
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.drag-list > .drag-item {
+			width: 200px;
+			height: 200px;
+			border-radius: 15px;
+			border: 2px solid #535455;
+			cursor: pointer;
+			margin: 0 15px;
+			background-color: #f3f3f5;
+			position: relative;
+		}
+
+		.drag-list > .drag-item > .drag-fill {
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center;
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			border-radius: 15px;
+		}
+
+		.drag-list > .drag-item > .drag-fill.drag-move {
+			border: 5px solid #989796;
+		}
+
+		.drag-list > .drag-item.drag-active {
+			border: 2px dashed #535455;
+			background-color: 2396ef;
+		}
+
+
+		@media (max-width:800px) {
+			body {
+				flex-direction:column; 
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="drag-list" id="drag-list">
+		<div class="drag-item">
+			<div class="drag-fill" draggable="true"></div>
+		</div>
+		<div class="drag-item"></div>
+		<div class="drag-item"></div>
+		<div class="drag-item"></div>
+		<div class="drag-item"></div>
+	</div>
+</body>
+<script>
+	const dragItems = document.querySelectorAll('.drag-list > .drag-item');
+	const dragFill = document.querySelector('.drag-fill');
+
+	function random(){
+    return Math.floor(Math.random() * 15);
+	}
+
+	function setFillImage(){
+    dragFill.style.backgroundImage = `url("https://www.eveningwater.com/my-web-projects/js/26/img/${ random() }.jpg")`
+	}
+
+	function on(el,type,handler,useCapture = false){
+    if(el && type && handler){
+      el.addEventListener(type,handler,useCapture);
+    }
+	}
+
+	function off(el,type,handler,useCapture = false){
+    if(el && type && handler){
+      el.removeEventListener(type,handler,useCapture);
+    }
+	}
+
+	function onDragStart(){
+    this.classList.add('drag-move');
+    setTimeout(() => this.className = "invisible",200);
+	}
+
+	function onDragEnd(){
+    this.classList.add("drag-fill");
+	}
+
+	function onDragOver(e){
+    e.preventDefault();
+	}
+
+	function onDragEnter(e){
+    e.preventDefault();
+    this.classList.add('drag-active');
+	}
+
+	function onDragLeave(){
+    this.className = "drag-item";
+	}
+
+	function onDrop(){
+    this.className = "drag-item";
+    this.appendChild(dragFill);
+	}
+
+	window.onload = () => {
+    setFillImage();
+    on(dragFill,'dragstart',onDragStart);
+    on(dragFill,'dragend',onDragEnd);
+    for(const item of dragItems){
+      on(item,'dragover',onDragOver);
+      on(item,'dragenter',onDragEnter);
+      on(item,'dragleave',onDragLeave);
+      on(item,'drop',onDrop);
+    }
+}
+</script>
+</html>
