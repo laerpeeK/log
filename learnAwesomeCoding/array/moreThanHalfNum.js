@@ -3,7 +3,7 @@
 解法1:开辟一个额外空间存储每个值出现的次数，时间复杂度最大为O(n)，逻辑简单
 
 解法2:
-	目标值的个数比其他所有值加起来的数多
+	目标值的个数比其他所有值加起来的数多,且大于数组长度的一般半
 
 	记录两个变量 1.数组中的某个值 2.次数
 
@@ -38,6 +38,7 @@ function MoreThanHalfNum_Solution2 (numbers) {
 	if (numbers && numbers.length > 0) {
 		let target = numbers[0]
 		let count = 1
+		//[1,2,3,2,5,4,6,7,8,9]
 		for (let i = 1; i < numbers.length; i++) {
 			if ( numbers[i] === target) {
 				count++
@@ -45,11 +46,13 @@ function MoreThanHalfNum_Solution2 (numbers) {
 				count--
 			}
 			if (count === 0) {
-				target = numbers[i]
+				target = numbers[i] //2 3 2 5
 				count = 1
 			}
 		}
+
 		count = 0
+
 		for( let i = 0; i < numbers.length; i++) {
 			if(numbers[i] === target) {
 				count++
