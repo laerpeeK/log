@@ -16,18 +16,20 @@ function InversePairs(data) {
 	return mergeSort(data, 0, data.length -1, [])
 }
 
+//归并排序
 function mergeSort(array, left, right, temp) {
 	if(left < right) {
 		const mid = parseInt((left + right) / 2)
-		const l = mergeSort(array, left, mid, temp)
-		const r = mergeSort(array, mid+1, right, temp)
-		const m = merge(array, left, right, mid, temp)
+		const l = mergeSort(array, left, mid, temp)  //左序对划分
+		const r = mergeSort(array, mid+1, right, temp) //右序对划分
+		const m = merge(array, left, right, mid, temp)  
 		return l + m + r
 	} else {
 		return 0
 	}
 }
 
+//归并
 function merge(array, left, right, mid, temp) {
 	let leftIndex = mid
 	let rightIndex = right
