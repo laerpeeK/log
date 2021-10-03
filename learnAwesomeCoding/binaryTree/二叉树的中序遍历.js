@@ -21,10 +21,10 @@ const inorderTravelsal = function (root) {
 	let current = root
 	while (current || stack.length > 0) {
 		while (current) {
-			stack.push(current)
+			stack.push(current)  //左子节点入栈
 			current = current.left
 		}
-		current = stack.pop()
+		current = stack.pop() //出栈意味着出栈的节点无左子节点，然后访问该节点，再对其右子节点进行中序遍历
 		result.push(current.val)
 		current = current.right
 	}
