@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>自动撑开页面高度，底栏总是出现在页面的底部</title>
+	<style>
+		.wrap {
+			display: flex;
+			padding: 0;
+			margin: 0;
+			min-height: 100vh;
+			flex-direction: column;
+		}
+
+		.main {
+			flex-grow: 1;
+		}
+	</style>
+</head>
+<body class="wrap">
+	<header style="line-height:50px; background:red; color:#fff;text-align: center">头部</header>
+	<main class="main">内容</main>
+	<footer  style="line-height:50px; background:#ebebeb; color:#333;text-align:center;">底栏</footer>
+</body>
+</html>
