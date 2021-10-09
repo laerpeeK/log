@@ -24,15 +24,15 @@ function deleteDuplication(pHead) {
 		current = pHead
 		while (current) {
 			const val = map[current.val]
-			if (val > 1) {
+			if (val > 1) { //>1
 				console.log(val)
 				if (current.next) {
 					current.val = current.next.val
-					current.next = current.next.next
-				} else if (current === pHead) {
+					current.next = current.next.next //后移
+				} else if (current === pHead) { //是头节点，且无后续
 					current = null
 					pHead = null
-				} else {
+				} else { //尾节点
 					current = pHead
 					while (current.next.next) {
 						current = current.next
