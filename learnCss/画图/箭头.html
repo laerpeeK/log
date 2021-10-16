@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>arrow</title>
+	<style>
+		.curvedarrow {
+			position: relative;
+			width: 0;
+			height: 0;
+			border-top: 9px solid transparent;
+			border-right: 9px solid skyblue;
+			transform: rotate(10deg);
+		}
+
+		.curvedarrow:after {
+			position: absolute;
+			top: -12px;
+			left: -9px;
+			width: 12px;
+			height: 12px;
+			content: '';
+			border: 0 solid transparent;
+			border-top: 3px solid skyblue;
+			border-radius: 20px 0 0 0;
+			transform: rotate(45deg);
+		}
+
+	</style>
+</head>
+<body>
+	<div class="curvedarrow"></div>
+</body>
+</html>
