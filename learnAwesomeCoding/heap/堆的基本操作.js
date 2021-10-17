@@ -15,7 +15,7 @@ tips:最后一个叶子节点的索引值是n-1，它的父节点索引值是[(n
 
 function adjustMaxHeap(array, index, length) {
 	for (let i = 2*index + 1; i < length; i = 2 * i + 1) { 
-		if (i+1 <length && array[i+1] > array[i]) { //取左右节点大的那个
+		if (i+1 <length && array[i+1] > array[i]) { //取左右子节点大的那个
 			i++
 		}
 		if (array[index] >= array[i]) {
