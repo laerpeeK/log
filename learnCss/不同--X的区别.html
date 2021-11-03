@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>不同x的区别</title>
+	<style>
+		 .one, .two {
+			 margin-left: 1600px;
+			 background-color: skyblue;
+			 width: 400px;
+			 height: 400px;
+		 }
+	</style>
+</head>
+<body>
+	<h1>from: https://www.cnblogs.com/echolun/p/9231760.html</h1>
+	<p>
+		pageX：鼠标指针距离文档左侧边缘的距离，不随滚动条变化而变化。<br/>
+		clientX：鼠标指针距离可视窗口左侧边缘的距离，随滚动条变化而变化，如果拖动滚动条让元素距离可视窗口左侧越近，值越小。<br/>
+		screenX：鼠标指针距离屏幕的距离(包括浏览器工具栏之类)，不随滚动条变化而变化 <br/>
+		offsetX：鼠标指针距离当前绑定元素左侧距离 <br/>
+		scrollX: 文档从左侧开始滚动的像素值 <br/>
+		子级的offsetLeft = 父级左偏移量20px+子级30px+父级边框2px, 父级非static定位的第一个目标，父级absolute则为30px <br/>
+
+	</p>
+	<p>
+		pageX = 鼠标到可视窗口左侧距离+滚动条滚动距离(如果有滚动条) <br/>
+		clientX = 鼠标到可视窗口左侧距离 
+	</p>
+
+	<p>
+		offsetHeight: 获取元素的宽度，包含border，padding，不包含margin。<br/>
+		clientHeight: 获取元素内容区域的宽度，包括padding与元素的width，不包含border与margin，一般用于获取视窗高度，不包括溢出不可见部分的高度。<br/>
+		scrollHeight：只读属性是一个元素内容高度的度量，包括由于溢出导致的视图中不可见内容，包含padding和width，不包含border与margin
+	</p>
+
+	<p>
+		scrolleTop:获取元素滚动后的距离文档顶部的距离，也就是滚动条滚动的距离。
+		clientTop:获取元素边框的厚度，也就是border的宽度。
+ 		有个公式：element.scrollHeight - element.scrollTop === element.clientHeight用于判断滚动条是否滚动到底。
+	</p>
+	<div class="one"></div>
+	<div class="two"></div>
+</body>
+<script>
+	const one = document.querySelector('.one')
+	const two = document.querySelector('.two')
+	one.onmousemove = (e) => {
+		let x1 = e.pageX,
+				y1 = e.pageY,
+				x2 = e.clientX,
+				y2 = e.clientY,
+				x3 = e.offsetX,
+				y3 = e.offsetY
+				x4 = e.screenX,
+				y4 = e.screenY,
+				x5 = window.scrollX,
+				y5 = window.scrollY
+				one.innerHTML = `pageX:${x1}, pageY${y1}, clientX${x2}, clientY${y2}, offsetX${x3}, offsetY${y3}, screenX${x4}, screenY${y4}, scrollX${x5}, scrollY${y5}`
+	}
+
+	two.onmousemove = (e) => {
+		let offsetHeight = two.offsetHeight,
+				clientHeight = two.clientHeight,
+				scrollHeight = window.scrollHeight
+		two.innerHTML = `offsetHeight:${offsetHeight}, clientHeight: ${clientHeight}, window.scrollHeight: ${scrollHeight}`
+	}
+
+
+</script>
+</html>
