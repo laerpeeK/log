@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>聚焦文本末尾</title>
+	<style>
+		input {
+			width: 150px;
+			text-align: center;
+		}
+
+		textarea {
+			margin: 0 auto;
+			width: 200px;
+			height: 150px;
+
+		}
+	</style>
+</head>
+	<input value="面料"/>
+	<textarea>
+1.面料：选用优质西皮，厚度≥1.0mm，撕裂力≥30N，经液态浸色及防潮、防污等工艺处理,皮面柔软舒适,光泽持久。 
+2.海绵：采用优质高密度阻燃海绵，用抽纱或丝绒覆面，表面有防腐化和防变型保护膜，回弹性高，耐用度高,防碎，防氧化，回弹率≥35%，拉伸强度≥90kPa，伸长率≥130%，干热老化后拉伸强度≥55kPa，湿热老化后拉伸强度≥55kPa，抗疲劳力强，坐感舒适。
+3.弓型脚：喷涂弓形脚架/金属脚架，经酸洗磷化等处理，表面电镀工艺。
+	</textarea>
+</body>
+<script>
+	const txt = document.querySelector('textarea')
+	const ipt = document.querySelector('input')
+	setTimeout(() => {
+		ipt.focus()
+		// txt.focus()
+	},1000)
+</script>
+</html>
