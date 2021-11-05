@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<button id="btn">Click</button>
+</body>
+<script>
+	const btn = document.querySelector('#btn')
+	let p1
+
+	//测试用，实际上事件就是异步的没必要用Promise封装
+	btn.addEventListener('click', function(){
+		p1 = new Promise((resolve) => {
+			resolve('click')
+		}).then(
+			(value) => {
+		console.log(value)
+		},
+		(err) => {
+			console.log(err)
+		})
+	})
+
+</script>
+
+</html>
