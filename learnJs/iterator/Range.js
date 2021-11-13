@@ -16,6 +16,11 @@ class Range {
 			}
 		}
 	}
+	/*
+	*[Symmbol.iterator]() {
+		for(let x = Math.ceil(this.from); x<= this.to; x++) yield x
+	}
+	*/
 }
 
 for (let x of new Range(1, 10)) {
