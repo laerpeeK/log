@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -14,6 +14,15 @@
 	const clipboard = document.querySelector('#clipboard')
 	const btn = document.querySelector('#btn')
 	async function getClipboardContents () {
+		// navigator.clipboard.writeText('Hello').then((value) => {
+		// 	console.log('success', value)
+		// })
+		// navigator.clipboard.write('zzzz').then((value) => {
+		// 	console.log(value)
+		// })
+		// navigator.clipboard.read().then((value) => {
+		// 	console.log(value)
+		// })
 		try {
 			const clipboardItems = await navigator.clipboard.read()
 			console.log('clipboardItems', clipboardItems)
@@ -30,6 +39,7 @@
 				}
 			}
 		} catch(e) {
+			console.log(e)
 			return 'error'
 		}
 	}
