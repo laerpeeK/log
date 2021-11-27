@@ -32,4 +32,22 @@ class newLinkedList extends LinkedList {
 		}
 		return false
 	}
+
+	//删除倒数第k个节点
+	//时间复杂度0n,空间复杂度O1
+	removeByIndexFromEnd(index) {
+		if (this.checkCircle()) return false
+		let pos = 1
+		this.reverseList()
+		let currentNode = this.head.next
+		while (currentNode !== null && pos < index) {
+			currentNode = currentNode.next
+			pos++
+		}
+		if (currentNode === null) {
+			return false
+		}
+		this.remove(curretNode.element)
+		this.reverseList()
+	}
 }
