@@ -65,6 +65,7 @@ class newLinkedList extends LinkedList {
 }
 
 //两个有序链表合并
+//时间复杂度On,空间复杂度O1
 const mergeSortedLists = (listA, listB) => {
 	if (!listA) {
 		return listB
@@ -86,7 +87,7 @@ const mergeSortedLists = (listA, listB) => {
 	}
 
 	let currentNode = resultList
-	
+
 	while (a!==null && b!== null) {
 		if (a.element < b.element) {
 			currentNode.next = a
