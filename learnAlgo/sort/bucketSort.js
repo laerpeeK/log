@@ -1,3 +1,5 @@
+//时间复杂度m*k*logk -》 On  单个桶快排k*logk  k = n/m  m个桶
+//前提：桶间有序，数据在各个桶的分布比较均匀
 function bucketSort(array, bucketSize = 5) {
 	if (array.length < 2) {
 		return array
