@@ -21,17 +21,76 @@ class SkipList {
 		return level
 	}
 
+	//Ologn
+	insert(value) {
+		const level = SkipList.randomLevel()
+		const newNode = new Node()
+		newNode.data = value
+		newNode.maxLevel = level
+		const update = new Array(level).fill(new Node())
+		let p = this.head
+		for (let i = level - 1; i >= 0; i--) {
+			while (p.refer[i] !== undefined && p.refer[i].data < value) {
+				p = p.refer[i]
+			}
+			update[i] = p  // update[i].refer[i].data >= newNode.data && update[i].data < newNode.data
+		}
+
+		for (let i = 0; i < level; i++) {
+			newNode.refer[i] = update[i].refer[i]
+			update[i].refer[i] = newNode
+		}
+		if (this.levelCount < level) {
+			this.levelCount = level
+		}
+	}
+
+
+	//Om*logn  m:每一级索引最多需要遍历的结点
 	find(value) {
 		if (!value) return null
 		let p = this.head
-		for (let i = this.levelCount - 1; i >= 0; i--) {
+		for (let i = this.levelCout - 1; i >= 0; i--) {
 			while (p.refer[i] !== undefined && p.refer[i].data < value) {
 				p = p.refer[i]
 			}
 		}
+
 		if (p.refer[0] !== undefined && p.refer[0].data === value) {
 			return p.refer[0]
 		}
 		return null
+	}
+
+	//Ologn
+	remove(value) {
+		let _node
+		let p = this.head
+		const update = new Array(new Node())
+		for (let i = this.levelCount-1; i>=0; i--) {
+			while (p.refer[i] !== undefined && p.refer[i].data < value) {
+				p = p.refer[i]
+			}
+			update[i] = p
+		}
+
+		if(p.refer[0] !== undefined && p.refer[0].data === value) {
+			_node = p.refer[0]
+			for (let i = 0; i <= this.levelCount - 1; i++) {
+				if (update[i].refer[i] !== undefined && update[i].refer[i].data === value) {
+					update[i].refer[i] = update[i].refer[i].refer[i]
+				}
+			}
+			return _node
+		}
+		return null
+	}
+
+	printAll() {
+		let p = this.head
+		while (p.refer[0] !== undefined) {
+			console.log(p.refer[0].data)
+			p = p.refer[0]
+		}
 	}
 }	
