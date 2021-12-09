@@ -10,16 +10,19 @@ class HashTable {
 		}
 		return hash%37
 	}
-
+	
+	//时间复杂度O1
 	put(key, value) {
 		let position = this.loseHashCode(key)
 		this.table[position] = value
 	}
 
+	//时间复杂度O1，可到On
 	remove(key) {
 		this.table[this.loseHashCode(key)] = undefined
 	}
 
+	//时间复杂度O1
 	get (key) {
 		return this.table[this.loseHashCode(key)]
 	}
